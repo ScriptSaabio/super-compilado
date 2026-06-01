@@ -11,14 +11,19 @@
 
     <!-- css -->
     <link rel="stylesheet" href="./style.css">
+
+    <!-- Icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
-<body>
+<body class="light">
 
 
     <!-- HEADER -->
     <header>
         <h1>Painel de Ferramentas</h1>
+        <i id="tema" class="fa-regular fa-moon"></i>
     </header>
 
     <div class="container">
@@ -26,23 +31,42 @@
         <!-- MENU LATERAR -->
         <aside class="sidebar">
             <h2>Desafios</h2>
-            <ul>
-                <li onclick="">Moedas</li>
-                <li onclick="">IMC</li>
-                <li onclick="">Temperatura</li>
-                <li onclick="">Velocidade</li>
-                <li onclick="">Massa</li>
-                <li onclick="">Regra de 3</li>
+            <ul id="desafios">
+                <li id="moedas">Moedas</li>
+                <li id="imc">IMC</li>
+                <li id="temperatura">Temperatura</li>
+                <li id="velocidade">Velocidade</li>
+                <li id="massa">Massa</li>
+                <li id="regra-de-3">Regra de 3</li>
             </ul>
         </aside>
 
         <main>
-            <form id="imc" action="">
-                <input type="number" id="peso" name="peso" placeholder="Peso (Kg)" />
-                <input type="number" id="altura" name="altura" placeholder="Altura (m)" />
-                <button id="btnCalcularImc">CALCULAR</button>
-                <p id="resultadoImc"></p>
-            </form>
+            <section class="hidden moedas">
+                <h1>Conversor de Moedas</h1>
+                <form>
+                    <input type="number" id="valorMoeda" name="valorMoeda" placeholder="Valor" />
+                    <select id="tipoMoeda" name="tipoMoeda">
+                        <option value="usd">USD → BRL</option>
+                        <option value="brl">BRL → USD</option>
+                    </select>
+                    <button id="btnConverterMoeda">CONVERTER</button>
+                    <p id="resultadoMoeda"></p>
+                </form>
+            </section>
+            <section class="hidden imc">
+                <h1>Cálculo de IMC</h1>
+                <form>
+                    <input type="number" id="peso" name="peso" placeholder="Peso (Kg)" />
+                    <input type="number" id="altura" name="altura" placeholder="Altura (m)" />
+                    <button id="btnCalcularImc">CALCULAR</button>
+                    <p id="resultadoImc"></p>
+                </form>
+            </section>
+            <section class="hidden temperatura">Conteúdo Temperatura</section>
+            <section class="hidden velocidade">Conteúdo Velocidade</section>
+            <section class="hidden massa">Conteúdo Massa</section>
+            <section class="hidden regra-de-3">Conteúdo Regra de 3</section>
         </main>
 
     </div>

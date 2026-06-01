@@ -1,4 +1,90 @@
 // =====================
+// ATIVAR E DESATIVAR DESAFIOS
+// =====================
+const elementos = {
+    desafios: document.querySelector("#desafios"),
+    sections: document.querySelectorAll("section")
+}
+
+// monitora eventos de clique na lista de desafios
+elementos.desafios.addEventListener("click", (e) => {
+    e.preventDefault();
+    ativarDesafio(e.target.id);
+});
+
+// função para ativar o desafio selecionado
+function ativarDesafio(id) {
+    // esconde todos
+    elementos.sections.forEach((s) => {
+        // verifica se a classe hidden já existe, se não existir adiciona
+        if (!s.classList.contains("hidden")) {
+            s.classList.add("hidden");
+        }
+
+        // remove a classe hidden do desafio selecionado
+        if (s.classList.contains(id)) {
+            s.classList.remove("hidden");
+        }
+    });
+}
+
+// =====================
+// ATIVAR E DESATIVAR PAINEL
+// =====================
+const tema = document.getElementById('tema');
+const elemento = {
+    body: document.body
+}
+tema.addEventListener('click', () => {
+    elemento.body.classList.toggle('dark');
+
+    if (elemento.body.classList.contains('dark')) {
+        tema.className = "fa-regular fa-sun";
+    } else {
+        tema.className = "fa-regular fa-moon";
+    }
+});
+
+//====================
+// DESAFIO MOEDAS
+// =====================
+const btnConverterMoeda = document.getElementById("btnConverterMoeda");
+
+btnConverterMoeda.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const valor = parseFloat(document.getElementById("valorMoeda").value);
+    const tipo = document.getElementById("tipoMoeda").value;
+
+    converterMoeda(valor, tipo);
+});
+
+async function converterMoedas(valor, tipo) {
+    let resultadoMoeda = document.getElementById("resultadoMoeda")
+
+    try {
+        const res = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL");
+        const data = await res.json();
+        const cotacao = parseFloat(data.USDBRL.bid);
+
+        let resultado;
+
+        if (tipo === "usd") {
+            resultado = valor * cotacao;
+        } else {
+            resultado = valor / cotacao;
+        }
+
+        resultadoMoeda.innerText = `Resultado: ${resultado.toFixed(2)}`;
+
+    } catch {
+        resultadoMoeda.innerText = "Erro ao buscar cotação";
+    }
+}
+
+
+
+// =====================
 // IMC
 // =====================
 const calculaImc = document.getElementById('btnCalcularImc');
