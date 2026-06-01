@@ -103,6 +103,7 @@ header > i {
 }
 
 
+
 .container{
     display: flex;
     flex: 8;
@@ -121,6 +122,14 @@ aside {
     align-items: center;
     flex-direction: column;
     padding: 20px;
+}
+
+
+aside > button {
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
 }
 
 aside > h2 {
@@ -189,7 +198,7 @@ select{
     border: 1px solid var(--color-aside-bg);
 }
 
-button{
+form > button{
     width: 200px;
     border-radius: 10px;
     padding: 10px;
@@ -197,7 +206,7 @@ button{
     border: 1px solid var(--color-primary);
 }
 
-button:hover{
+form > button:hover{
     background-color: var(--color-primary);
     color: var(--color-text-inverse);
 }

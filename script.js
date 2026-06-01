@@ -29,6 +29,25 @@ function ativarDesafio(id) {
 }
 
 // =====================
+// LIMPAR CAMPOS
+// =====================
+const btnLimpar = document.getElementById("btnLimpar");
+
+btnLimpar.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // limpa os campos de moeda
+    document.getElementById("valorMoeda").value = "";
+    document.getElementById("tipoMoeda").value = "usd";
+    document.getElementById("resultadoMoeda").innerText = "";
+
+    // limpa os campos de imc
+    document.getElementById("peso").value = "";
+    document.getElementById("altura").value = "";
+    document.getElementById("resultadoImc").innerHTML = "";
+});
+
+// =====================
 // ATIVAR E DESATIVAR PAINEL
 // =====================
 const tema = document.getElementById('tema');
@@ -56,7 +75,7 @@ btnConverterMoeda.addEventListener("click", (e) => {
     const valor = parseFloat(document.getElementById("valorMoeda").value);
     const tipo = document.getElementById("tipoMoeda").value;
 
-    converterMoeda(valor, tipo);
+    converterMoedas(valor, tipo);
 });
 
 async function converterMoedas(valor, tipo) {
