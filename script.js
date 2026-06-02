@@ -36,15 +36,13 @@ const btnLimpar = document.getElementById("btnLimpar");
 btnLimpar.addEventListener("click", (e) => {
     e.preventDefault();
 
-    // limpa os campos de moeda
-    document.getElementById("valorMoeda").value = "";
-    document.getElementById("tipoMoeda").value = "usd";
-    document.getElementById("resultadoMoeda").innerText = "";
+    // pega todos os forms da página
+    document.querySelectorAll("form").forEach(form => form.reset());
 
-    // limpa os campos de imc
-    document.getElementById("peso").value = "";
-    document.getElementById("altura").value = "";
-    document.getElementById("resultadoImc").innerHTML = "";
+    // limpa todos os resultados
+    document.querySelectorAll("[id^='resultado']").forEach(el => {
+        el.innerHTML = "";
+    });
 });
 
 // =====================
@@ -156,4 +154,31 @@ function calcularImc(peso, altura) {
     `;
 
 }
+
+// =====================
+// TEMPERATURA
+// =====================
+const btnConverterTemp = document.getElementById("btnConverterTemp");
+
+btnConverterTemp.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const tempC = parseFloat(document.getElementById("temp").value);
+
+    converterTemp(tempC);
+});
+
+function converterTemp(c) {
+    const resultadoTemp = document.getElementById("resultadoTemp");
+
+    if (isNaN(c)) {
+        resultadoTemp.innerText = "Por favor, insira uma temperatura válida!";
+        return;
+    }
+
+    const f = (c * 1.8) + 32;
+
+    resultadoTemp.innerText = `Resultado: ${f.toFixed(2)} °F`;
+}
+
 
