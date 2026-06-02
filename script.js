@@ -115,17 +115,17 @@ calculaImc.addEventListener('click', (e) => {
 
     const peso = parseFloat(document.getElementById("peso").value);
     const altura = parseFloat(document.getElementById("altura").value);
+    const genero = document.getElementById("genero").value;
 
-    calcularImc(peso, altura)
-
+    calcularImc(peso, altura, genero)
 })
 
-function calcularImc(peso, altura) {
+function calcularImc(peso, altura, genero) {
 
     const resultado = document.getElementById('resultadoImc')
 
     // 1. Validação simples para não calcular vazio
-    if (!peso || !altura) {
+    if (!peso || !altura || !genero) {
         resultado.innerText = "Por favor, preencha todos os campos!";
         return;
     }
@@ -136,18 +136,28 @@ function calcularImc(peso, altura) {
     let classificacao = "";
 
     // 3. Tabela de decisão
-    if (imc < 18.5) {
-        classificacao = "Abaixo do peso";
-    } else if (imc < 25) {
-        classificacao = "Peso normal";
-    } else if (imc < 30) {
-        classificacao = "Sobrepeso";
-    } else if (imc < 35) {
-        classificacao = "Obesidade Grau I";
-    } else if (imc < 40) {
-        classificacao = "Obesidade Grau II";
-    } else {
-        classificacao = "Obesidade Grau III";
+    if (genero === "m") {
+        if (imc < 18.5) {
+            classificacao = "Abaixo do peso";
+        } else if (imc < 25) {
+            classificacao = "Peso normal";
+        } else if (imc < 30) {
+            classificacao = "Sobrepeso";
+        } else {
+            classificacao = "Obesidade";
+        }
+    }
+
+    if (genero === "f") {
+        if (imc < 18.5) {
+            classificacao = "Abaixo do peso";
+        } else if (imc < 24) {
+            classificacao = "Peso normal";
+        } else if (imc < 29) {
+            classificacao = "Sobrepeso";
+        } else {
+            classificacao = "Obesidade";
+        }
     }
 
     // 4. Exibe na tela
@@ -239,4 +249,29 @@ function converterMassa(kg) {
     resultadoMassa.innerText = `${kg.toFixed(2)} Kg são iguais a ${lb.toFixed(2)} lb`;
 }
 
+// =====================
+// REGRA DE 3
+// =====================
+const btnCalcularRegraDe3 = document.getElementById("btnCalcularRegraDe3");
 
+btnCalcularRegraDe3.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const valorA = parseFloat(document.getElementById("valorA").value);
+    const valorB = parseFloat(document.getElementById("valorB").value);
+    const valorC = parseFloat(document.getElementById("valorC").value);
+
+    calcularRegraDe3(valorA, valorB, valorC);
+});
+
+function calcularRegraDe3(a, b, c) {
+    const resultadoRegraDe3 = document.getElementById("resultadoRegraDe3");
+
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        resultadoRegraDe3.value = "Por favor, insira valores válidos!";
+        return;
+    }
+
+    const resultado = (b * c) / a;
+    resultadoRegraDe3.value = `X = ${resultado.toFixed(2)}`;
+}
