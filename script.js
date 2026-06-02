@@ -24,6 +24,7 @@ function ativarDesafio(id) {
         // remove a classe hidden do desafio selecionado
         if (s.classList.contains(id)) {
             s.classList.remove("hidden");
+            limpaCampos();
         }
     });
 }
@@ -35,7 +36,10 @@ const btnLimpar = document.getElementById("btnLimpar");
 
 btnLimpar.addEventListener("click", (e) => {
     e.preventDefault();
+    limpaCampos();
+});
 
+function limpaCampos() {
     // pega todos os forms da página
     document.querySelectorAll("form").forEach(form => form.reset());
 
@@ -43,10 +47,10 @@ btnLimpar.addEventListener("click", (e) => {
     document.querySelectorAll("[id^='resultado']").forEach(el => {
         el.innerHTML = "";
     });
-});
+}
 
 // =====================
-// ATIVAR E DESATIVAR PAINEL
+// TROCA DE TEMA
 // =====================
 const tema = document.getElementById('tema');
 const elemento = {
@@ -178,7 +182,61 @@ function converterTemp(c) {
 
     const f = (c * 1.8) + 32;
 
-    resultadoTemp.innerText = `Resultado: ${f.toFixed(2)} °F`;
+    resultadoTemp.innerText = `${c.toFixed(2)} °C são iguais a ${f.toFixed(2)} °F`;
+}
+
+
+
+// =====================
+// VELOCIDADE
+// =====================
+const btnConverterVelocidade = document.getElementById("btnConverterVelocidade");
+
+btnConverterVelocidade.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const velKm = parseFloat(document.getElementById("velocidade").value);
+
+    converterVel(velKm);
+});
+
+function converterVel(km) {
+    const resultadoVel = document.getElementById("resultadoVel");
+
+    if (isNaN(km)) {
+        resultadoVel.innerText = "Por favor, insira uma velocidade válida!";
+        return;
+    }
+
+    const mph = km * 0.621371;
+
+    resultadoVel.innerText = ` ${km.toFixed(2)} km/h são iguais a ${mph.toFixed(2)} mph`;
+}
+
+// =====================
+// MASSA
+// =====================
+const btnConverterMassa = document.getElementById("btnConverterMassa");
+
+btnConverterMassa.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const massaKg = parseFloat(document.getElementById("massa").value);
+
+    converterMassa(massaKg);
+});
+
+function converterMassa(kg) {
+    const resultadoMassa = document.getElementById("resultadoMassa");
+
+    if (isNaN(kg)) {
+        resultadoMassa.innerText = "Por favor, insira uma massa válida!";
+        return;
+    }
+
+    const lb = kg * 2.20462;
+
+    resultadoMassa.innerText = `${kg.toFixed(2)} Kg são iguais a ${lb.toFixed(2)} lb`;
 }
 
 
