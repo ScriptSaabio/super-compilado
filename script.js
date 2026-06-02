@@ -87,12 +87,12 @@ async function converterMoedas(valor, tipo) {
         let resultado;
 
         if (tipo === "usd") {
-            resultado = valor * cotacao;
+            resultado = (valor * cotacao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         } else {
-            resultado = valor / cotacao;
+            resultado = (valor / cotacao).toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
         }
 
-        resultadoMoeda.innerText = `Resultado: ${resultado.toFixed(2)}`;
+        resultadoMoeda.innerText = `Valor Convertido: ${resultado}`;
 
     } catch {
         resultadoMoeda.innerText = "Erro ao buscar cotação";
