@@ -44,12 +44,13 @@
 
         <main>
             <section>
-                <h1>Bem vindo a Selva!</h1> 
+                <h1>Bem vindo a Selva!</h1>
                 <h2>Aceitamos visitas, mas não garantimos a sua sanidade mental ao sair.</h2>
             </section>
             <section class="hidden moedas">
                 <h1>Conversor de Moedas</h1>
                 <form>
+                    <label for="valorMoeda">Valor:</label>
                     <input type="number" id="valorMoeda" name="valorMoeda" placeholder="Valor" />
                     <select id="tipoMoeda" name="tipoMoeda">
                         <option value="usd">USD → BRL</option>
@@ -62,19 +63,29 @@
             <section class="hidden imc">
                 <h1>Cálculo de IMC</h1>
                 <form>
+                    <label for="peso">Peso (Kg):</label>
                     <input type="number" id="peso" name="peso" placeholder="Peso (Kg)" />
+                    <label for="altura">Altura (m):</label>
                     <input type="number" id="altura" name="altura" placeholder="Altura (m)" />
-                    <select name="genero" id="genero">
-                        <option value="m">Homem</option>
-                        <option value="f">Mulher</option>
-                    </select>
+                    <label for="genero">Gênero:</label>
+                    <div name="genero" id="genero" class="genero">
+                        <label for="masculino">
+                            <input type="radio" id="masculino" name="genero" value="m">
+                            Masculino
+                        </label>
+                        <label for="feminino">
+                            <input type="radio" id="feminino" name="genero" value="f">
+                            Feminino
+                        </label>
+                    </div>
                     <button id="btnCalcularImc">CALCULAR</button>
                     <p id="resultadoImc"></p>
                 </form>
             </section>
-            <section class="hidden temperatura">                
+            <section class="hidden temperatura">
                 <h1>Converter temperatura (C em F)</h1>
                 <form>
+                    <label for="temp">Temperatura (°C):</label>
                     <input type="number" id="temp" name="temp" placeholder="Temperatura (°C)" />
                     <button id="btnConverterTemp">CONVERTER</button>
                     <p id="resultadoTemp"></p>
@@ -83,6 +94,7 @@
             <section class="hidden velocidade">
                 <h1>Converter velocidade (Km/h em Milhas/h)</h1>
                 <form>
+                    <label for="velocidade">Velocidade (Km/h):</label>
                     <input type="number" id="velocidade" name="velocidade" placeholder="Velocidade (Km/h)" />
                     <button id="btnConverterVelocidade">CONVERTER</button>
                     <p id="resultadoVelocidade"></p>
@@ -91,6 +103,7 @@
             <section class="hidden massa">
                 <h1>Converter Massa (Kg em Libras)</h1>
                 <form>
+                    <label for="massa">Massa (Kg):</label>
                     <input type="number" id="massa" name="massa" placeholder="Massa (Kg)" />
                     <button id="btnConverterMassa">CONVERTER</button>
                     <p id="resultadoMassa"></p>
@@ -99,8 +112,11 @@
             <section class="hidden regra-de-3">
                 <h1>Regra de 3 Simples (X = (b * c) / a)</h1>
                 <form>
+                    <label for="valorA">Valor A:</label>
                     <input type="number" id="valorA" name="valorA" placeholder="Valor A" />
+                    <label for="valorB">Valor B:</label>
                     <input type="number" id="valorB" name="valorB" placeholder="Valor B" />
+                    <label for="valorC">Valor C:</label>
                     <input type="number" id="valorC" name="valorC" placeholder="Valor C" />
                     <button id="btnCalcularRegraDe3">CALCULAR</button>
                     <input type="text" id="resultadoRegraDe3" placeholder="o X da questão" readonly />

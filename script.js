@@ -115,10 +115,23 @@ calculaImc.addEventListener('click', (e) => {
 
     const peso = parseFloat(document.getElementById("peso").value);
     const altura = parseFloat(document.getElementById("altura").value);
-    const genero = document.getElementById("genero").value;
+    
+    
 
     calcularImc(peso, altura, genero)
 })
+
+function getGenero() {
+    const radios = document.getElementsByName("genero");
+
+    for (const radio of radios) {
+        if (radio.checked) {
+            return radio.value;
+        }
+    }
+
+    return null; // Retorna null se nenhum gênero for selecionado
+}
 
 function calcularImc(peso, altura, genero) {
 
