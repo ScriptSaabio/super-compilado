@@ -80,26 +80,81 @@ btnConverterMoeda.addEventListener("click", (e) => {
     converterMoedas(valor, tipo);
 });
 
+const ERROS_API = {
+    400: "Requisição inválida.",
+    401: "Não autorizado.",
+    403: "Acesso negado.",
+    404: "Serviço de cotação não encontrado.",
+    500: "Erro interno do servidor da API.",
+    502: "Gateway inválido.",
+    503: "Serviço indisponível.",
+    DEFAULT: "Erro inesperado ao converter moeda."
+};
+
+
 async function converterMoedas(valor, tipo) {
     let resultadoMoeda = document.getElementById("resultadoMoeda")
 
+        if (isNaN(valor)) {
+            resultadoMoeda.innerText = "Por favor, insira um valor numérico válido!";
+            return;
+        }
+
     try {
+        
+        resultadoMoeda.innerText = "Carregando...";
+
+        // 2. Requisição
         const res = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL");
+
+        // 3. Tratativa HTTP
+        if (!res.ok) {
+            throw { tipo: "HTTP", status: res.status };
+        }
+
         const data = await res.json();
+
+        // 4. Validação da resposta
+        if (!data || !data.USDBRL || !data.USDBRL.bid) {
+            throw { tipo: "API", codigo: "DEFAULT" };
+        }
+
         const cotacao = parseFloat(data.USDBRL.bid);
+
+        if (isNaN(cotacao)) {
+            throw { tipo: "API", codigo: "DEFAULT" };
+        }
 
         let resultado;
 
+        // 5. Conversão
         if (tipo === "usd") {
-            resultado = (valor * cotacao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            resultado = (valor * cotacao).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
         } else {
-            resultado = (valor / cotacao).toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
+            resultado = (valor / cotacao).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'USD'
+            });
         }
 
         resultadoMoeda.innerText = `Valor Convertido: ${resultado}`;
 
-    } catch {
-        resultadoMoeda.innerText = "Erro ao buscar cotação";
+    } catch (erro) {
+        console.error("Erro na conversão:", erro);
+
+        // 6. Tratamento centralizado
+        if (erro.tipo === "HTTP") {
+            resultadoMoeda.innerText = ERROS_API[erro.status] || ERROS_API.DEFAULT;
+
+        } else if (erro.tipo === "VALIDACAO" || erro.tipo === "API") {
+            resultadoMoeda.innerText = ERROS_API[erro.codigo] || ERROS_API.DEFAULT;
+
+        } else {
+            resultadoMoeda.innerText = ERROS_API.DEFAULT;
+        }
     }
 }
 
