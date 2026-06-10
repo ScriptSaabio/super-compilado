@@ -402,14 +402,17 @@ btnCalcularRegraDe3.addEventListener("click", (e) => {
 
 function calcularRegraDe3(a, b, c) {
     const resultadoRegraDe3 = document.getElementById("resultadoRegraDe3");
+    const erroReg3 = document.getElementById("erroRegra3");
+    erroReg3.innerText = '';
+    resultadoRegraDe3.value = '';
 
     if (isNaN(a) || isNaN(b) || isNaN(c)) {
-        resultadoRegraDe3.value = "Por favor, insira valores válidos!";
+        erroReg3.innerText = "Por favor, insira valores válidos!";
         return;
     }
 
-    if(a = 0){
-        resultadoRegraDe3.value = "Não é possivel fazer divisão por zero";
+    if(a <= 0){
+        erroReg3.innerText = "Não é possivel fazer divisão por zero";
         return;
     }
 
