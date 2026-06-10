@@ -171,7 +171,7 @@ calculaImc.addEventListener('click', (e) => {
     const peso = parseFloat(document.getElementById("peso").value);
     const altura = parseFloat(document.getElementById("altura").value);
     
-    
+    const genero = getGenero();
 
     calcularImc(peso, altura, genero)
 })

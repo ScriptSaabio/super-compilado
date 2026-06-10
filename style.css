@@ -184,18 +184,16 @@ form{
     gap: 10px;
 }
 
-.genero{
+.genero {
     display: flex;
-    width: 200px;
+    gap: 20px;
 }
 
 .genero label {
-    width: 100px;
-    gap: 2px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    gap: 5px;
+    width: 100px;
 }
 
 label{
