@@ -83,28 +83,40 @@
                 </form>
             </section>
             <section class="hidden temperatura">
-                <h1>Converter temperatura (C em F)</h1>
+                <h1>Converter temperatura</h1>
                 <form>
-                    <label for="temp">Temperatura (°C):</label>
-                    <input type="number" id="temp" name="temp" placeholder="Temperatura (°C)" />
+                    <label for="temp">Temperatura:</label>
+                    <input type="number" id="temp" name="temp" placeholder="Temperatura" />
+                    <select id="tipoConversaoTemperatura" name="tipoConversaoTemperatura">
+                        <option value="cel">C° → F°</option>
+                        <option value="fah">F° → C°</option>
+                    </select>
                     <button id="btnConverterTemp">CONVERTER</button>
                     <p id="resultadoTemp"></p>
                 </form>
             </section>
             <section class="hidden velocidade">
-                <h1>Converter velocidade (Km/h em Milhas/h)</h1>
+                <h1>Converter velocidade:</h1>
                 <form>
-                    <label for="velocidade">Velocidade (Km/h):</label>
-                    <input type="number" id="velocidade" name="velocidade" placeholder="Velocidade (Km/h)" />
+                    <label for="vel">Velocidade:</label>
+                    <input type="number" id="vel" name="velocidade" placeholder="Velocidade (Km/h)" />
+                    <select id="tipoConversaoVelocidade" name="tipoConversaoVelocidade">
+                        <option value="km">Km → mph</option>
+                        <option value="mph">mph → Km</option>
+                    </select>
                     <button id="btnConverterVelocidade">CONVERTER</button>
                     <p id="resultadoVelocidade"></p>
                 </form>
             </section>
             <section class="hidden massa">
-                <h1>Converter Massa (Kg em Libras)</h1>
+                <h1>Converter Massa</h1>
                 <form>
-                    <label for="massa">Massa (Kg):</label>
-                    <input type="number" id="massa" name="massa" placeholder="Massa (Kg)" />
+                    <label for="massas">Massa:</label>
+                    <input type="number" id="massas" name="massa" placeholder="Massa" />
+                    <select id="tipoConversaoMassa" name="tipoConversaoMassa">
+                        <option value="kg">Kg → Lib</option>
+                        <option value="lib">Lib → Kg</option>
+                    </select>
                     <button id="btnConverterMassa">CONVERTER</button>
                     <p id="resultadoMassa"></p>
                 </form>

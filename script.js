@@ -245,22 +245,44 @@ const btnConverterTemp = document.getElementById("btnConverterTemp");
 btnConverterTemp.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const tempC = parseFloat(document.getElementById("temp").value);
+    const temp = parseFloat(document.getElementById("temp").value);
+    const conversaoGrau = document.getElementById("tipoConversaoTemperatura").value;
 
-    converterTemp(tempC);
+    converterTemp(temp, conversaoGrau);
 });
 
-function converterTemp(c) {
+function converterTemp(temp, conversaoGrau) {
     const resultadoTemp = document.getElementById("resultadoTemp");
 
-    if (isNaN(c)) {
+    if (isNaN(temp) || temp <= 0) {
         resultadoTemp.innerText = "Por favor, insira uma temperatura válida!";
         return;
     }
 
-    const f = (c * 1.8) + 32;
+    const conversoes = {
+        cel: {
+            valor: (t) => (t * 1.8) + 32,
+            origem: "°C",
+            destino: "°F"
+        },
+        fah: {
+            valor: (t) => (t - 32) / 1.8,
+            origem: "°F",
+            destino: "°C"
+        }
+    };
 
-    resultadoTemp.innerText = `${c.toFixed(2)} °C são iguais a ${f.toFixed(2)} °F`;
+    const conversao = conversoes[conversaoGrau];
+
+    if (!conversao) {
+        resultadoTemp.innerText = "Conversão inválida.";
+        return;
+    }
+
+    const resultado = conversao.valor(temp);
+
+    resultadoTemp.innerText =
+        `${temp.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
 }
 
 
@@ -273,23 +295,47 @@ const btnConverterVelocidade = document.getElementById("btnConverterVelocidade")
 btnConverterVelocidade.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const velKm = parseFloat(document.getElementById("velocidade").value);
+    const velocidade = parseFloat(document.getElementById("vel").value);
+    console.log(velocidade);
+    const conversaoVelocidade = document.getElementById("tipoConversaoVelocidade").value;
 
-    converterVel(velKm);
+    converterVel(velocidade, conversaoVelocidade);
 });
 
-function converterVel(km) {
-    const resultadoVel = document.getElementById("resultadoVel");
+function converterVel(velocidade, conversaoVelocidade) {
+    const resultadoVel = document.getElementById("resultadoVelocidade");
 
-    if (isNaN(km)) {
+    if (isNaN(velocidade) || velocidade <= 0) {
         resultadoVel.innerText = "Por favor, insira uma velocidade válida!";
         return;
     }
 
-    const mph = km * 0.621371;
+    const conversoes = {
+        km: {
+            valor: (v) => v * 0.621371,
+            origem: "km/h",
+            destino: "mph"
+        },
+        mph: {
+            valor: (v) => v / 0.621371,
+            origem: "mph",
+            destino: "km/h"
+        }
+    };
 
-    resultadoVel.innerText = ` ${km.toFixed(2)} km/h são iguais a ${mph.toFixed(2)} mph`;
+    const conversao = conversoes[conversaoVelocidade];
+
+    if (!conversao) {
+        resultadoVel.innerText = "Conversão inválida.";
+        return;
+    }
+
+    const resultado = conversao.valor(velocidade);
+
+    resultadoVel.innerText =
+        `${velocidade.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
 }
+
 
 // =====================
 // MASSA
@@ -299,22 +345,44 @@ const btnConverterMassa = document.getElementById("btnConverterMassa");
 btnConverterMassa.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const massaKg = parseFloat(document.getElementById("massa").value);
+    const massa = parseFloat(document.getElementById("massas").value);
+    const conversaoMassa = document.getElementById("tipoConversaoMassa").value;
 
-    converterMassa(massaKg);
+    converterMassa(massa, conversaoMassa);
 });
 
-function converterMassa(kg) {
+function converterMassa(massa, conversaoMassa) {
     const resultadoMassa = document.getElementById("resultadoMassa");
 
-    if (isNaN(kg)) {
+    if (isNaN(massa) || massa <= 0) {
         resultadoMassa.innerText = "Por favor, insira uma massa válida!";
         return;
     }
 
-    const lb = kg * 2.20462;
+    const conversoes = {
+        kg: {
+            valor: (m) => m * 2.20462,
+            origem: "kg",
+            destino: "lb"
+        },
+        lib: {
+            valor: (m) => m / 2.20462,
+            origem: "lb",
+            destino: "kg"
+        }
+    };
 
-    resultadoMassa.innerText = `${kg.toFixed(2)} Kg são iguais a ${lb.toFixed(2)} lb`;
+    const conversao = conversoes[conversaoMassa];
+
+    if (!conversao) {
+        resultadoMassa.innerText = "Conversão inválida.";
+        return;
+    }
+
+    const resultado = conversao.valor(massa);
+
+    resultadoMassa.innerText =
+        `${massa.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
 }
 
 // =====================
@@ -337,6 +405,11 @@ function calcularRegraDe3(a, b, c) {
 
     if (isNaN(a) || isNaN(b) || isNaN(c)) {
         resultadoRegraDe3.value = "Por favor, insira valores válidos!";
+        return;
+    }
+
+    if(a = 0){
+        resultadoRegraDe3.value = "Não é possivel fazer divisão por zero";
         return;
     }
 

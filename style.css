@@ -231,9 +231,10 @@ form > button:hover{
 }
 
 form > p {
-    width: 200px;
+    width: 300px;
     border-radius: 10px;
     padding: 10px;
+    text-align: center;
 }
 
 footer{
