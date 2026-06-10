@@ -259,7 +259,7 @@ function converterTemp(temp, conversaoGrau) {
         return;
     }
 
-    const conversoes = {
+    const conversoesTemperatura = {
         cel: {
             valor: (t) => (t * 1.8) + 32,
             origem: "°C",
@@ -272,17 +272,17 @@ function converterTemp(temp, conversaoGrau) {
         }
     };
 
-    const conversao = conversoes[conversaoGrau];
+    const conversoeTemperatura = conversoesTemperatura[conversaoGrau];
 
-    if (!conversao) {
+    if (!conversoeTemperatura) {
         resultadoTemp.innerText = "Conversão inválida.";
         return;
     }
 
-    const resultado = conversao.valor(temp);
+    const resultado = conversoeTemperatura.valor(temp);
 
     resultadoTemp.innerText =
-        `${temp.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
+        `${temp.toFixed(2)} ${conversoeTemperatura.origem} são iguais a ${resultado.toFixed(2)} ${conversoeTemperatura.destino}`;
 }
 
 
@@ -310,7 +310,7 @@ function converterVel(velocidade, conversaoVelocidade) {
         return;
     }
 
-    const conversoes = {
+    const conversoesVel = {
         km: {
             valor: (v) => v * 0.621371,
             origem: "km/h",
@@ -323,17 +323,17 @@ function converterVel(velocidade, conversaoVelocidade) {
         }
     };
 
-    const conversao = conversoes[conversaoVelocidade];
+    const conversaoVel = conversoesVel[conversaoVelocidade];
 
-    if (!conversao) {
+    if (!conversaoVel) {
         resultadoVel.innerText = "Conversão inválida.";
         return;
     }
 
-    const resultado = conversao.valor(velocidade);
+    const resultado = conversaoVel.valor(velocidade);
 
     resultadoVel.innerText =
-        `${velocidade.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
+        `${velocidade.toFixed(2)} ${conversaoVel.origem} são iguais a ${resultado.toFixed(2)} ${conversaoVel.destino}`;
 }
 
 
@@ -351,7 +351,7 @@ btnConverterMassa.addEventListener("click", (e) => {
     converterMassa(massa, conversaoMassa);
 });
 
-function converterMassa(massa, conversaoMassa) {
+function converterMassa(massa, conversaoMassas) {
     const resultadoMassa = document.getElementById("resultadoMassa");
 
     if (isNaN(massa) || massa <= 0) {
@@ -359,7 +359,7 @@ function converterMassa(massa, conversaoMassa) {
         return;
     }
 
-    const conversoes = {
+    const conversoesMassa = {
         kg: {
             valor: (m) => m * 2.20462,
             origem: "kg",
@@ -372,17 +372,17 @@ function converterMassa(massa, conversaoMassa) {
         }
     };
 
-    const conversao = conversoes[conversaoMassa];
+    const conversaoMassa = conversoesMassa[conversaoMassas];
 
-    if (!conversao) {
+    if (!conversaoMassa) {
         resultadoMassa.innerText = "Conversão inválida.";
         return;
     }
 
-    const resultado = conversao.valor(massa);
+    const resultado = conversaoMassa.valor(massa);
 
     resultadoMassa.innerText =
-        `${massa.toFixed(2)} ${conversao.origem} são iguais a ${resultado.toFixed(2)} ${conversao.destino}`;
+        `${massa.toFixed(2)} ${conversaoMassa.origem} são iguais a ${resultado.toFixed(2)} ${conversaoMassa.destino}`;
 }
 
 // =====================
